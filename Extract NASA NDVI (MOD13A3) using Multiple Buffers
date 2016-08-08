@@ -1,0 +1,59 @@
+import arcpy
+import os
+from arcpy import env
+
+# Set environment settings
+
+env.workspace = "C:/data"
+
+#Set the location of outputs
+
+output_path="C:/Users/xzhang10/Desktop/GIS/NDVI/2002/"
+
+#Read datafiles for clip
+
+in_path = "C:/Users/xzhang10/Desktop/NDVI/NDVI_data/2002/MOD13A3_out"
+shp_list = []
+date_id = []
+tile_id = []
+for dirpath, dirnames, files in os.walk(in_path):
+  for f in files:
+    if f.lower().endswith("_reproj.dat"):
+      fullpath = os.path.join(dirpath, f)
+      shp_list.append(fullpath)
+      date_id.append(f[9:16]) # Numbers change with the length of the full path, 9:16 means reading from No. 9 char to No. 16 char
+      tile_id.append(f[17:23])
+
+#Read the ozone buffer
+Buffer_path = 'C:/Users/xzhang10/Desktop/GIS/Buffer4/'
+shp_list2=[]
+fnameid2=[]
+fname2=[]
+fileid2=[]
+file2=[]
+for dirpath, dirnames, files in os.walk(Buffer_path):
+  for f in files:
+    if f.lower().endswith(".shp"):
+      fullpath = os.path.join(dirpath, f)
+      shp_list2.append(fullpath)
+      fnameid2=os.path.basename(fullpath)
+      fname2.append(fnameid2)
+      fileid2=os.path.splitext(fnameid2)
+      file2.append(fileid2[0])
+
+out_path='C:/Users/xzhang10/Desktop/GIS/NDVI/2002/'
+
+#Clip raster
+
+for i in range(0,60):
+  for j in range (0,8):
+    in_raster = shp_list[i]
+    out_feature=tile_id[i]+date_id[i]+file2[j]
+    clip_feature = shp_list2[j]
+
+#Clip the layer, remove the points located outside of the study area
+    Rectangle = "-110 23 -91 39"
+    arcpy.Clip_management(in_raster,Rectangle,out_feature, clip_feature,"#","ClippingGeometry","MAINTAIN_EXTENT")
+
+#Conver raster to vector points
+    arcpy.RasterToPoint_conversion(out_feature, "NDVI"+out_feature, "VALUE")
