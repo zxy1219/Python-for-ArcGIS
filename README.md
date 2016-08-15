@@ -3,7 +3,7 @@ A hub of Everthing-You-Need to use python for GIS
 
 
 
-1. How to apply Python for ArcGIS?
+How to apply Python for ArcGIS?
 
 First of all, you should install an recent version of ArcGIS for Desktop. And make sure you have the python platform in the window of ArcMAP. The symbol of the python platform is highlighted in the picture below.
 ![capture](https://cloud.githubusercontent.com/assets/7432988/17651368/74aae1de-622b-11e6-9cb2-b8869cc8eaee.PNG)
@@ -14,7 +14,7 @@ Then open the python platform.
 Now you can write your python code in the platform!
 
 
-2. Why I need to use Python for ArcGIS?
+Why I need to use Python for ArcGIS?
 
 The ArcMAP is a very powerful tool to generate environmental, geographic, and public health data that could be used in the decision makeing and finding solutions for the environ-health problems. However, it cann't automatically work with multiple jobs in an sequence. But we still need a Big Data dataset and enormous amount of information to reach our study purpose. Then we need an program to save outselves from those processing tasks of thousands input files.
 [Picture from Google]
