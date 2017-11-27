@@ -1,5 +1,5 @@
 # Welcome to my GitHub site!
-A hub of Everthing-You-Need to use Python for GIS
+A hub of Everthing-You-Need to use Python for GIS.
 
 Why I need to use Python for ArcGIS?
 
