@@ -1,0 +1,48 @@
+import arcpy
+
+variable = "prmsl"
+x_dimension = "x"
+y_dimension = "y"
+band_dimension = ""
+dimension = "time"
+valueSelectionMethod = "BY_VALUE"
+
+outLoc = "C:/Users/xzhang10/Desktop/Infill/AOD/SLP/SLP_out/2012/"
+inNetCDF = "C:/Users/xzhang10/Desktop/Infill/AOD/SLP/prmsl.2012.nc"
+
+nc_FP = arcpy.NetCDFFileProperties(inNetCDF)
+nc_Dim = nc_FP.getDimensions()
+
+for dimension in nc_Dim:
+    top = nc_FP.getDimensionSize(dimension)
+    for i in range(365,366):
+        if dimension == "time":
+            dimension_values = nc_FP.getDimensionValue(dimension, i)
+            nowFile = "prmsl"+str(i)
+
+            #THIS IS THE NEW CODE HERE
+            dv1 = ["time", dimension_values]
+            dimension_values = [dv1]
+            #END NEW CODE
+
+            arcpy.MakeNetCDFRasterLayer_md(inNetCDF, variable, x_dimension, y_dimension, nowFile,band_dimension, dimension_values, valueSelectionMethod)
+            arcpy.CopyRaster_management(nowFile, outLoc + nowFile + ".img", "", "", "", "NONE", "NONE", "")
+            print dimension_values, i 
+
+
+import arcpy
+
+# Conver raster to vector points
+
+in_path = "C:/Users/######//AOD/SLP/SLP_out/2012/"
+out_path = "C:/Users/######//GIS/AOD/SLP/2012_TX/"
+
+ # Clip raster
+for i in range(365,366):
+ in_raster = in_path +"prmsl"+str(i)+".img"
+ out_feature =  "prmsl_2012_tx"+str(i)
+ Clip_feature="C:/Users/xzhang10/Desktop/Infill/GIS/AOD/Boundary/Texas_extend.shp"
+ arcpy.Clip_management(in_raster,"#",out_feature,Clip_feature,"#","ClippingGeometry","MAINTAIN_EXTENT")
+ 
+ # Conver raster to vector points
+ arcpy.RasterToPoint_conversion("prmsl_2012_tx"+str(i), out_path+"prmsl_2012_tx"+str(i)+".shp", "VALUE")
