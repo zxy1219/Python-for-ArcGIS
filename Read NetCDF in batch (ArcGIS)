@@ -7,8 +7,8 @@ band_dimension = ""
 dimension = "time"
 valueSelectionMethod = "BY_VALUE"
 
-outLoc = "C:/Users/xzhang10/Desktop/Infill/AOD/SLP/SLP_out/2012/"
-inNetCDF = "C:/Users/xzhang10/Desktop/Infill/AOD/SLP/prmsl.2012.nc"
+outLoc = "C:/Users/######/AOD/SLP/SLP_out/2012/"
+inNetCDF = "C:/Users/######/AOD/SLP/prmsl.2012.nc"
 
 nc_FP = arcpy.NetCDFFileProperties(inNetCDF)
 nc_Dim = nc_FP.getDimensions()
