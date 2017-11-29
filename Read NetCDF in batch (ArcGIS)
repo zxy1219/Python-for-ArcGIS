@@ -1,10 +1,17 @@
+###################################################################################
+######## Read NOAA's NARR meteorolgy data (NetCDF format) in ArcGIS ###############
+###################################################################################
+
 import arcpy
 
-variable = "prmsl"
-x_dimension = "x"
-y_dimension = "y"
+# Variable name
+variable = "prmsl" 
+# Longitude
+x_dimension = "x" 
+# Latitude
+y_dimension = "y" 
 band_dimension = ""
-dimension = "time"
+dimension = "time" 
 valueSelectionMethod = "BY_VALUE"
 
 outLoc = "C:/Users/######/AOD/SLP/SLP_out/2012/"
@@ -29,6 +36,7 @@ for dimension in nc_Dim:
             arcpy.CopyRaster_management(nowFile, outLoc + nowFile + ".img", "", "", "", "NONE", "NONE", "")
             print dimension_values, i 
 
+# The number of output layers will equal to the number of "dimension"
 
 import arcpy
 
