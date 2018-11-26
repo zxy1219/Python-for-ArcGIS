@@ -4,13 +4,13 @@ from arcpy import env
 
 #intersect
  #Read intersect features
-path1 = "J:/pediatrics/STROUSTRUP/NICUHEALTH/TRAP Study -Xueying/GIS/Buffer_dis/" 
-out="J:/pediatrics/STROUSTRUP/NICUHEALTH/TRAP Study -Xueying/GIS/County_intersect/"
+path1 = "J:/XXXXX/TRAP Study -Xueying/GIS/Buffer_dis/" 
+out="J:/XXXXX/County_intersect/"
 shp_list1=[]
 shp_list2=[]
 name_id = []
 
-shp_list2="C:/Users/zhangx24/Desktop/Work/TRAP_NNNS/GIS/tl_2017_us_county/tl_2017_us_county.shp"
+shp_list2="C:/XXXX/GIS/tl_2017_us_county/tl_2017_us_county.shp"
 
 for dirpath, dirnames, files in os.walk(path1):
  for f in files:
