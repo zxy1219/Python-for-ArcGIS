@@ -1,0 +1,25 @@
+import arcpy
+import os
+from arcpy import env
+
+#intersect
+ #Read intersect features
+path1 = "J:/pediatrics/STROUSTRUP/NICUHEALTH/TRAP Study -Xueying/GIS/Buffer_dis/" 
+out="J:/pediatrics/STROUSTRUP/NICUHEALTH/TRAP Study -Xueying/GIS/County_intersect/"
+shp_list1=[]
+shp_list2=[]
+name_id = []
+
+shp_list2="C:/Users/zhangx24/Desktop/Work/TRAP_NNNS/GIS/tl_2017_us_county/tl_2017_us_county.shp"
+
+for dirpath, dirnames, files in os.walk(path1):
+ for f in files:
+  if f.lower().endswith(".shp"):
+   fullpath = os.path.join(dirpath, f)
+   shp_list1.append(fullpath)
+   start = f.find('Buffer_') + 7
+   end = f.find('_dis', start)
+   name_id.append(f[start:end])
+
+for i in range(0,11):
+   arcpy.Intersect_analysis([shp_list1[i],shp_list2], out+ name_id[i] +"inter"+".shp", "ALL","","INPUT")
